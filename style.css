@@ -1,0 +1,68 @@
+*{
+    box-sizing: border-box;
+}
+#wrapper{
+    max-width: 1024px;
+    height: 50vh;
+    margin: auto;
+    padding: 1em;
+    background-color: aquamarine;
+    display: flex;
+    justify-content: space-evenly;
+}
+.cellule{
+    width: 100px;
+    height: 100px;
+    background-color: azure;
+    border: 1px solid black;
+    
+}
+#jeu{
+display: flex;
+flex-wrap: wrap;
+max-width: 300px;
+    
+}
+p{
+    font-weight: bold;
+}
+.cellule{
+    text-align: center;
+    font-size: 6em;
+    line-height: 100px;
+}
+button{
+    margin: 1em 0;
+    padding: 0.4em;
+    font-size: 2em;
+    background-color: rgb(14, 140, 250);
+    color: rgb(241, 241, 241);
+    border-radius: 10px;
+}
+.plateau{
+    text-align: center;
+}
+h3{
+    color: darkmagenta;
+    font-size: 2em;
+}
+.joueur, .col{
+    color: rgb(233, 151, 0);
+}
+.egale{
+    color: rgb(53, 53, 53);
+}
+.danger{
+    color: red;
+    animation: rouge 1s;
+    font-size: 1.5em;
+}
+
+@keyframes rouge {
+    from{
+        transform: scale(5);
+    }to{
+        transform: scale(0);
+    }
+    
+}

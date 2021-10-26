@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div>
+            <h1>Le jeu de morpion</h1>
+            <div id="joueur">
+                <h3></h3>
+                <h4 id="x"></h4>
+                <h4 id="o"></h4>
+                <h4 id="danger"></h4>
+                
+            </div>
+        </div>
+        <div class="plateau">
+            <div id="jeu"></div>
+            <button id="bouton">Rejouer</button>
+        </div>
+        
+    </div>
+    
+    <script>
+        let compteur = 0
+        let compteurx = 0
+        let compteuro = 0
+        let joueurActif = "X"
+        let jeuActif = false 
+        var tableJeu
+
+        let scoring = document.querySelector("#x")
+        let scoringo = document.querySelector("#o")
+        let danger = document.querySelector("#danger")
+
+         let cell = document.createElement("div")
+         cell.classList.add("cellule")
+        const jeu = document.querySelector("#jeu")
+        for(let i = 0; i < 9; i++){
+            let cel = cell.cloneNode()
+            cel.dataset.index = i
+            jeu.appendChild(cel)
+        }
+        init()
+        
+
+        function jouer(event){
+            let content = event.target.innerText
+            if(content == ""){
+                event.target.innerText = joueurActif
+                tableJeu[event.target.dataset.index] = joueurActif
+                let result = gagner(tableJeu)
+                if(result > 0){
+                    showWinner()
+                }
+                else if(result == 0){
+                    egalite()
+                }
+
+                if(joueurActif == "O"){
+                    joueurActif = "X"
+                }else{
+                    joueurActif = "O"
+                }  
+            }
+            else{
+                danger.innerHTML = "<p class='danger'>Cette case a été déjà choisi</p>"
+            }
+            
+            
+        }
+           
+        
+        const recommence =  document.querySelector("#bouton").addEventListener("click", init)    
+        const winner = document.querySelector("h3")
+
+        function egalite(){
+            if(tableJeu.filter(String).length == 9){
+                winner.innerHTML = "<span class='egale'>Egalité !!</span>"
+            }else{
+                winner.innerHTML = "Tour de joueur <span class='joueur'>"+joueurActif+"</span>"
+            }
+            
+        }
+        
+        function scor(){
+                if(compteurx > 0){
+                    scoring.innerHTML = "Joueur "+joueurActif+" a gagné : <span class='col'>"+compteurx+"</span>fois"
+                }else{
+                    scoringo.innerHTML = "Joueur "+joueurActif+" a gagné : <span class='col'>"+compteuro+"</span>fois"
+                }   
+        }
+        //scor()
+
+
+        function showWinner(){
+            winner.innerHTML = "Joueur <span class='joueur'>"+joueurActif+"</span> a gagné !!"
+            console.log(joueurActif)
+            if(joueurActif == "O"){
+                console.log(joueurActif)
+                compteuro++
+                scoringo.innerHTML = "Joueur "+joueurActif+" a gagné <span class='col'>: "+compteuro+"</span> fois"
+            }else{
+                compteurx++
+                scoring.innerHTML = "Joueur "+joueurActif+" a gagné : <span class='col'>"+compteurx+"</span> fois"
+            }
+            
+            document.querySelectorAll(".cellule").forEach(cell => {
+                cell.removeEventListener("click", jouer)
+            })
+        }
+
+        function init(){
+            document.querySelectorAll(".cellule").forEach(cell => {
+                cell.addEventListener("click", jouer)
+                cell.innerText = ""
+            })
+            tableJeu = new Array(9)
+            document.querySelector("h3").innerHTML = ""
+            
+        }
+
+        function gagner(tableJeu){
+            for(let win of tableJeu){
+                if(tableJeu[0] === joueurActif && tableJeu[1] === joueurActif && tableJeu[2] === joueurActif){
+                    return 1
+                }
+                else if(tableJeu[3] === joueurActif && tableJeu[4] === joueurActif && tableJeu[5] === joueurActif){
+                    return 1
+                }
+                else if(tableJeu[6] === joueurActif && tableJeu[7] === joueurActif && tableJeu[8] === joueurActif){
+                    return 1
+                }
+                else if(tableJeu[0] === joueurActif && tableJeu[3] === joueurActif && tableJeu[6] === joueurActif){
+                    return 1
+                }
+                else if(tableJeu[1] === joueurActif && tableJeu[4] === joueurActif && tableJeu[7] === joueurActif){
+                    return 1
+                }
+                else if(tableJeu[2] === joueurActif && tableJeu[5] === joueurActif && tableJeu[8] === joueurActif){
+                    return 1
+                }
+                else if(tableJeu[0] === joueurActif && tableJeu[4] === joueurActif && tableJeu[8] === joueurActif){
+                    return 1
+                }
+                else if(tableJeu[2] === joueurActif && tableJeu[4] === joueurActif && tableJeu[6] === joueurActif){
+                    return 1
+                }
+                else{
+                    return 0
+                }
+            }
+            return -1
+        }
+
+
+        
+
+    </script>
+</body>
+</html>
