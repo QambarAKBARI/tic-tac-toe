@@ -9,21 +9,22 @@
 </head>
 <body>
     <div id="wrapper">
-        <div>
-            <h1>Le jeu de morpion</h1>
-            <div id="joueur">
-                <h3></h3>
+        <div id="container">
+            <div class="joueur">
+                <h1>Joueur X</h1>
                 <h4 id="x"></h4>
+            </div>
+            <div class="plateau">
+                <h1>Le jeu de morpion</h1>
+                <h3></h3>
+                <div id="jeu"></div>
+                <button id="bouton">Rejouer</button>
+            </div>
+            <div class="joueur">
+                <h1>Joueur O</h1>
                 <h4 id="o"></h4>
-                <h4 id="danger"></h4>
-                
             </div>
         </div>
-        <div class="plateau">
-            <div id="jeu"></div>
-            <button id="bouton">Rejouer</button>
-        </div>
-        
     </div>
     
     <script>
@@ -34,9 +35,8 @@
         let jeuActif = false 
         var tableJeu
 
-        let scoring = document.querySelector("#x")
-        let scoringo = document.querySelector("#o")
-        let danger = document.querySelector("#danger")
+        let scorePlayeX = document.querySelector("#x")
+        let scorePlayeO = document.querySelector("#o")
 
          let cell = document.createElement("div")
          cell.classList.add("cellule")
@@ -68,11 +68,6 @@
                     joueurActif = "O"
                 }  
             }
-            else{
-                danger.innerHTML = "<p class='danger'>Cette case a été déjà choisi</p>"
-            }
-            
-            
         }
            
         
@@ -81,33 +76,29 @@
 
         function egalite(){
             if(tableJeu.filter(String).length == 9){
-                winner.innerHTML = "<span class='egale'>Egalité !!</span>"
+                winner.innerHTML = "<span class='egale'>Egalité !!!</span>"
             }else{
                 winner.innerHTML = "Tour de joueur <span class='joueur'>"+joueurActif+"</span>"
             }
-            
         }
         
-        function scor(){
+        function scorePlayer(){
                 if(compteurx > 0){
-                    scoring.innerHTML = "Joueur "+joueurActif+" a gagné : <span class='col'>"+compteurx+"</span>fois"
+                    scorePlayeX.innerHTML = "Joueur "+joueurActif+" a gagné : <span class='col'>"+compteurx+"</span>fois"
                 }else{
-                    scoringo.innerHTML = "Joueur "+joueurActif+" a gagné : <span class='col'>"+compteuro+"</span>fois"
+                    scorePlayeO.innerHTML = "Joueur "+joueurActif+" a gagné : <span class='col'>"+compteuro+"</span>fois"
                 }   
         }
-        //scor()
-
 
         function showWinner(){
             winner.innerHTML = "Joueur <span class='joueur'>"+joueurActif+"</span> a gagné !!"
-            console.log(joueurActif)
             if(joueurActif == "O"){
                 console.log(joueurActif)
                 compteuro++
-                scoringo.innerHTML = "Joueur "+joueurActif+" a gagné <span class='col'>: "+compteuro+"</span> fois"
+                scorePlayeO.innerHTML = "Joueur "+joueurActif+" a gagné <span class='col'>: "+compteuro+"</span> fois"
             }else{
                 compteurx++
-                scoring.innerHTML = "Joueur "+joueurActif+" a gagné : <span class='col'>"+compteurx+"</span> fois"
+                scorePlayeX.innerHTML = "Joueur "+joueurActif+" a gagné : <span class='col'>"+compteurx+"</span> fois"
             }
             
             document.querySelectorAll(".cellule").forEach(cell => {
@@ -157,9 +148,6 @@
             }
             return -1
         }
-
-
-        
 
     </script>
 </body>

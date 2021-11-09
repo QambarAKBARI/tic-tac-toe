@@ -2,13 +2,20 @@
     box-sizing: border-box;
 }
 #wrapper{
-    max-width: 1024px;
-    height: 50vh;
+    max-width: 1240px;
+    height: 100vh;
     margin: auto;
     padding: 1em;
     background-color: aquamarine;
     display: flex;
     justify-content: space-evenly;
+}
+#container{
+    display: flex;
+    width: 100%;
+}
+.joueur, .plateau{
+    flex: 1;
 }
 .cellule{
     width: 100px;
@@ -21,48 +28,53 @@
 display: flex;
 flex-wrap: wrap;
 max-width: 300px;
+margin: auto;
     
 }
-p{
-    font-weight: bold;
-}
+
 .cellule{
     text-align: center;
     font-size: 6em;
     line-height: 100px;
+    cursor: pointer;
 }
-button{
-    margin: 1em 0;
-    padding: 0.4em;
-    font-size: 2em;
-    background-color: rgb(14, 140, 250);
-    color: rgb(241, 241, 241);
-    border-radius: 10px;
-}
+
 .plateau{
+    width: 300px;
     text-align: center;
+}
+#bouton{
+    font-size: 1em;
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    color: antiquewhite;
+    background-color: rgb(233, 151, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 900;
 }
 h3{
     color: darkmagenta;
-    font-size: 2em;
-}
-.joueur, .col{
-    color: rgb(233, 151, 0);
-}
-.egale{
-    color: rgb(53, 53, 53);
-}
-.danger{
-    color: red;
-    animation: rouge 1s;
     font-size: 1.5em;
 }
+.col, .egale{
+    color: rgb(233, 151, 0);
+    font-weight: 900;
+}
+.joueur{
+    color: black;
+    text-align: center;
+}
 
-@keyframes rouge {
-    from{
-        transform: scale(5);
-    }to{
-        transform: scale(0);
+@media screen and (max-width:965px) {
+    #container{
+        flex-direction: column;
+    }
+    #container .plateau{
+        width: 300px;
+        margin: auto;
     }
     
 }
+
